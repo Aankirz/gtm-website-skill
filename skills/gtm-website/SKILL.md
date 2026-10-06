@@ -81,7 +81,7 @@ Write `PRODUCT.md` (impeccable reads this file): audience, problem, promise, pri
 
 Offer two routes:
 
-**A. Pick a real style (recommended).** Tell them to open https://styles.refero.design, browse, click a style they love, and download its **DESIGN.md** (or paste the style's link here). Save it as `DESIGN.md` in the project. Prompt template from Refero to adapt internally:
+**A. Pick a real style (recommended).** Tell them to open https://styles.refero.design, browse, click a style they love, and download its **DESIGN.md** (or paste the style's link here). Save it as `DESIGN.md` in the current folder (it moves into the project in Phase 4). Prompt template from Refero to adapt internally:
 > Design [screen] for [audience] so they can [job]. Use DESIGN.md for type and color roles. Use our real copy and product behavior; the reference does not define them.
 
 Browse ideas by mood: https://styles.refero.design/ai-agents/design-prompts
@@ -103,7 +103,8 @@ npm i lucide-react motion @vercel/analytics
 ```
 
 - **shadcn/ui** = polished building blocks. **lucide-react** = icon library. **motion** = animations. **@vercel/analytics** = free visitor stats.
-- Move `PRODUCT.md`, `DESIGN.md`, `GTM_PROGRESS.md` into the project folder.
+- Move `PRODUCT.md`, `DESIGN.md`, `GTM_PROGRESS.md` into the project folder, and leave a one-line `GTM_PROGRESS.md` in the parent folder saying "Project moved to ./acme-site".
+- Tell the user: **from now on, open Claude Code inside the project folder** (`cd acme-site` then `claude`). On resume, if `GTM_PROGRESS.md` only contains a pointer, tell them to do exactly that.
 - Create `CLAUDE.md` in the project:
   ```md
   # Project design context
@@ -162,7 +163,7 @@ Explain: "GitHub is the online home for your site's code; Vercel will watch it a
 1. Login (user runs): `! gh auth login` → choose **GitHub.com → HTTPS → Yes → Login with a web browser**, copy the code, approve in browser.
 2. You run:
 ```bash
-git init -b main 2>/dev/null; git add -A
+git add -A   # create-next-app already set up git
 git commit -m "feat: initial GTM website"
 gh repo create acme-site --private --source=. --push
 ```
@@ -172,13 +173,13 @@ Confirm `.gitignore` excludes `node_modules`, `.env*`, `.next`.
 
 **Recommended (no terminal):** tell them to open https://vercel.com/new → **Import** the `acme-site` repo → leave settings as-is → **Deploy**. In ~1 minute they get a live link like `acme-site.vercel.app`. From now on, **every time you push to GitHub, the live site updates automatically.**
 
-**CLI alternative:** `! npx vercel login`, then you run `npx vercel link --yes` and `npx vercel --prod`.
+**CLI alternative:** `! npx vercel login`, then you run `npx vercel link --yes`, `npx vercel git connect` (so pushes auto-deploy), and `npx vercel --prod`.
 
 Open the live URL together; check the CTA, the mobile view, and that sharing the link (e.g. in WhatsApp/Slack) shows the OG image.
 
 ## Phase 10 — Buy & connect a domain (≈15 min + wait)
 
-**Pick a name:** brainstorm 10 options from the product name — short, easy to spell aloud, `.com` first; alternatives `.ai`/`.io`/`.co`/`.app` or prefixes like `get`/`try`/`use` + name. Check availability with `whois <domain>` (no "Domain Name:" record ≈ likely free) and confirm on the registrar.
+**Pick a name:** brainstorm 10 options from the product name — short, easy to spell aloud, `.com` first; alternatives `.ai`/`.io`/`.co`/`.app` or prefixes like `get`/`try`/`use` + name. Check availability with `whois <domain>` on Mac/Linux (no "Domain Name:" record ≈ likely free); always confirm in the registrar's search box before getting attached to a name.
 
 **Where to buy (they pay, you guide):**
 | Option | Why |
